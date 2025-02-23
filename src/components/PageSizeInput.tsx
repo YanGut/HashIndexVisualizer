@@ -1,16 +1,18 @@
 import { useState } from "react";
 
 interface PageSizeInputProps {
-  onChange: (size: number) => void;
+  setPageSize: (size: number) => void;
 }
 
-export default function PageSizeInput({ onChange }: PageSizeInputProps) {
+export default function PageSizeInput({ setPageSize }: PageSizeInputProps) {
   const [size, setSize] = useState<number | "">("");
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const value = event.target.value;
     if (value === "" || (!isNaN(Number(value)) && Number(value) > 0)) {
-      setSize(value === "" ? "" : Number(value));
+      const numericValue = value === "" ? 0 : Number(value);
+      setSize(value === "" ? "" : numericValue);
+      setPageSize(numericValue);
     }
   };
 
@@ -25,16 +27,10 @@ export default function PageSizeInput({ onChange }: PageSizeInputProps) {
           type="number"
           min="1"
           value={size}
-          onChange={handleChange}
+          onChange={(event) => handleChange(event)}
           className="w-32 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
           placeholder="Ex: 100"
         />
-        <button
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg font-medium"
-          onClick={() => onChange(size === "" ? 0 : Number(size))}
-        >
-          OK
-        </button>
       </div>
     </div>
   );

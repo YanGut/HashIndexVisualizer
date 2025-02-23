@@ -1,15 +1,17 @@
 import { useState } from "react";
 import SearchIcon from "../assets/icons/SearchIcon";
+import { on } from "events";
 interface SearchWordInputProps {
-  onChange: (word: string) => void;
+  setSearchWord: (word: string) => void;
 }
 
-export default function SearchWordInput({ onChange }: SearchWordInputProps) {
+export default function SearchWordInput({ setSearchWord }: SearchWordInputProps) {
   const [word, setWord] = useState<string>("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setWord(value);
+    setSearchWord(value);
   };
 
   return (
@@ -26,12 +28,6 @@ export default function SearchWordInput({ onChange }: SearchWordInputProps) {
           className="w-32 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
           placeholder="Ex: 'lymphangioendothelioma'"
         />
-        <button
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg font-medium"
-          onClick={() => onChange(word)}
-        >
-          <SearchIcon />
-        </button>
       </div>
     </div>
   );

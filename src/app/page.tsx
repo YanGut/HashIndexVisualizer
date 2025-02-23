@@ -7,13 +7,14 @@ import SearchWordInput from "@/components/SearchBar";
 import InsertWords from "@/components/InsertWords";
 
 import storeDisk from "@/service/storage";
+import { Page } from "@/types/Page";
 
 export default function Home() {
   const [pageSize, setPageSize] = useState<number>(1000);
   const [words, setWords] = useState<string[]>([]);
   const [searchWord, setSearchWord] = useState<string>("");
   const [isShowingTableScanButton, setIsShowingTableScanButton] = useState<boolean>(false);
-  const [disk, setDisk] = useState<Record<number, string[]>>({});
+  const [disk, setDisk] = useState<Page[]>([]);
 
   useEffect(() => {
     if (pageSize > 0 && searchWord.length > 0 && words.length > 0) {
@@ -24,11 +25,7 @@ export default function Home() {
   }, [pageSize, searchWord]);
 
   useEffect(() => {
-
-    console.log("startou a funcao");
     setDisk(storeDisk(words, pageSize));
-    console.log("terminou a funcao");
-
   }, [words, pageSize]);
 
   console.log(disk);

@@ -1,11 +1,13 @@
-export default function storeDisk(words: string[], pageSize: number): Record<number, string[]> {
-  const disk: Record<number, string[]> = {};
+import { Page } from "@/types/Page";
 
+export default function storeDisk(words: string[], pageSize: number): Page[] {
+  const disk: Page[] = [];
   let currentPage = 1;
   let currentWords: string[] = [];
+
   for (let i = 0; i < words.length; i++) {
     if (currentWords.length === pageSize) {
-      disk[currentPage] = currentWords;
+      disk.push({ id: currentPage, words: currentWords });
       currentPage++;
       currentWords = [];
 
@@ -17,7 +19,7 @@ export default function storeDisk(words: string[], pageSize: number): Record<num
 
   
   if (currentWords.length > 0) {
-    disk[currentPage] = currentWords;
+    disk.push({ id: currentPage, words: currentWords });
   }
   
   return disk;

@@ -1,13 +1,9 @@
 export class Bucket {
   id: number;
-  words: Map<string, number>;
+  word: string;
 
-  constructor(id: number) {
+  constructor(id: number, word: string) {
     this.id = id;
-    this.words = new Map();
-  }
-
-  addWord(word: string, pageId: number) {
-    this.words.set(word, pageId);
+    this.word = word;
   }
 }

@@ -5,7 +5,7 @@ interface PageSizeInputProps {
 }
 
 export default function PageSizeInput({ setPageSize }: PageSizeInputProps) {
-  const [size, setSize] = useState<number>(1000);
+  const [size, setSize] = useState<number>(100);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const value = parseInt(event.target.value);
@@ -13,8 +13,8 @@ export default function PageSizeInput({ setPageSize }: PageSizeInputProps) {
     if (value) {
       let numericValue: number = 0;
 
-      if (value < 1000) {
-        numericValue = 1000;
+      if (value < 100) {
+        numericValue = 100;
         alert("O tamanho da página deve ser maior ou igual a 1000");
         return;
       }

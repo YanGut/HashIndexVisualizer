@@ -1,34 +1,50 @@
-import { useState } from "react";
-import SearchIcon from "../assets/icons/SearchIcon";
-import { on } from "events";
-interface SearchWordInputProps {
+import { ChangeEvent } from "react";
+import SearchIcon from "@/assets/icons/SearchIcon";
+
+interface SearchBarProps {
+  searchWord: string;
   setSearchWord: (word: string) => void;
+  onSearch?: () => void;
+  isDisabled?: boolean;
 }
 
-export default function SearchWordInput({ setSearchWord }: SearchWordInputProps) {
-  const [word, setWord] = useState<string>("");
+export default function SearchBar({ 
+  searchWord, 
+  setSearchWord, 
+  onSearch,
+  isDisabled = false
+}: SearchBarProps) {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchWord(e.target.value);
+  };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setWord(value);
-    setSearchWord(value);
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && onSearch && !isDisabled && searchWord.trim()) {
+      onSearch();
+    }
   };
 
   return (
-    <div className="flex flex-col gap-2">
-      <label htmlFor="search-word" className="text-lg font-medium text-gray-700">
-        Palavra a ser buscada:
-      </label>
-      <div className="flex flex-row gap-2">
-        <input
-          id="search-word"
-          type="text"
-          value={word}
-          onChange={handleChange}
-          className="w-32 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
-          placeholder="Ex: 'lymphangioendothelioma'"
-        />
+    <div className="relative">
+      <div className="flex">
+        <div className="relative flex-1">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <SearchIcon className="w-5 h-5 text-gray-500" />
+          </div>
+          <input
+            type="text"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+            placeholder="Digite uma palavra para buscar..."
+            value={searchWord}
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
+            disabled={isDisabled}
+          />
+        </div>
       </div>
+      <p className="mt-1 text-xs text-gray-500">
+        Digite uma palavra para buscar no índice e pressione Enter ou clique nos botões abaixo
+      </p>
     </div>
   );
 }

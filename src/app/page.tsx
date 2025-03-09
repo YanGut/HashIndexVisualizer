@@ -71,7 +71,7 @@ export default function Home() {
 
     // Search using hash index
     const startIndexTime = performance.now();
-    const indexResult = searchByKey(searchWord, bucketList);
+    const indexResult = searchByKey(searchWord, bucketList, disk);
     const endIndexTime = performance.now();
     const indexTime = endIndexTime - startIndexTime;
 

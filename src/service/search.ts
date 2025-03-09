@@ -9,7 +9,7 @@ export function tableScanner(searchWord: string, disk: Page[]): TableScanResult 
 
   for (let i = 0; i < disk.length; i++) {
     const { words, id } = disk[i];
-  
+
     if (words.includes(searchWord)) {
       return {
         word: searchWord,
@@ -28,19 +28,23 @@ export function tableScanner(searchWord: string, disk: Page[]): TableScanResult 
   };
 }
 
-export function searchByKey(searchWord: string, bucketList: BucketList): SearchResult | null {
-  
+export function searchByKey(searchWord: string, bucketList: BucketList, disk: Page[]): SearchResult | null {
+
   const index = hashFunction(searchWord, bucketList.size);
   const bucket = bucketList.buckets[index];
 
   const bucketItem = bucket.search(searchWord);
 
   if (bucketItem) {
+    const page = disk[bucketItem.pageId - 1];
+
+    const word = page.words.find((word) => word === searchWord);
+
     return {
-      word: searchWord,
-      pageNumber: bucketItem.pageId,
+      word: word ? word : "Palavra não encontrada",
+      pageNumber: word ? bucketItem.pageId : 0,
       bucketIndex: index,
-      found: true
+      found: word ? true : false
     };
   }
 

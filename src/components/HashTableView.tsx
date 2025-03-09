@@ -26,7 +26,7 @@ export default function HashTableView({ bucketList, selectedWord }: HashTableVie
             <li
               key={idx}
               className={`p-1 rounded ${
-                selectedWord === item.word ? 'bg-yellow-100' : ''
+                selectedWord === item.word ? 'bg-yellow-100 text-black' : ''
               }`}
             >
               <span className="font-medium">{item.word}</span> → Página {item.pageId}
@@ -68,15 +68,15 @@ export default function HashTableView({ bucketList, selectedWord }: HashTableVie
             key={index}
             className={`p-3 rounded-lg cursor-pointer border-2 transition-colors ${
               highlightedBucket === index
-                ? 'border-red-500 bg-red-50'
+                ? 'border-red-500 '
                 : 'border-gray-200 hover:border-blue-300'
             }`}
             onClick={() => setExpandedBucket(expandedBucket === index ? null : index)}
           >
             <div className="flex justify-between items-center">
               <h3 className="font-medium">Bucket {index}</h3>
-              <span className="text-sm bg-gray-100 px-2 py-1 rounded">
-                {bucket.bucketLines.length}/{bucket.bucketSize}
+              <span className="text-sm bg-gray-600 px-2 py-1 rounded">
+                {bucket.bucketLines.length.toLocaleString("pt-BR")}/{bucket.bucketSize.toLocaleString("pt-BR")}
                 {bucket.overflow && (
                   <span className="text-red-500 ml-1">+{
                     // Count all overflow items across all overflow buckets

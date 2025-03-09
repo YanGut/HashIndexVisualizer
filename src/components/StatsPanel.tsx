@@ -14,10 +14,10 @@ export default function StatsPanel({
   timeDifference
 }: StatsPanelProps) {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 ">
       <div className="grid grid-cols-1 gap-3">
-        <div className="bg-white border rounded-lg p-3">
-          <h3 className="text-sm font-medium text-gray-600">Taxa de Colisões</h3>
+        <div className="bg-gray-700 border rounded-lg p-3">
+          <h3 className="text-sm font-medium text-gray-200">Taxa de Colisões</h3>
           <div className="flex items-center mt-1">
             <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
               <div 
@@ -29,8 +29,8 @@ export default function StatsPanel({
           </div>
         </div>
         
-        <div className="bg-white border rounded-lg p-3">
-          <h3 className="text-sm font-medium text-gray-600">Taxa de Overflows</h3>
+        <div className="bg-gray-700 border rounded-lg p-3">
+          <h3 className="text-sm font-medium text-gray-200">Taxa de Overflows</h3>
           <div className="flex items-center mt-1">
             <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
               <div 
@@ -44,7 +44,7 @@ export default function StatsPanel({
       </div>
       
       <div className="border-t pt-4">
-        <h3 className="text-sm font-medium text-gray-600 mb-2">Estimativa de Custo</h3>
+        <h3 className="text-sm font-semibold text-gray-200 mb-2">Estimativa de Custo</h3>
         
         <div className="space-y-2">
           <div className="flex justify-between items-center">
@@ -71,8 +71,8 @@ export default function StatsPanel({
       
       {timeDifference !== 0 && (
         <div className="border-t pt-4">
-          <h3 className="text-sm font-medium text-gray-600 mb-2">Tempo de Processamento</h3>
-          <div className="bg-gray-50 rounded-lg p-3 border">
+          <h3 className="text-sm font-semibold text-gray-200 mb-2">Tempo de Processamento</h3>
+          <div className="bg-gray-700 rounded-lg p-3 border">
             <div className="flex justify-between items-center">
               <span>Diferença:</span>
               <span className={`font-bold ${timeDifference > 0 ? 'text-green-600' : 'text-red-600'}`}>

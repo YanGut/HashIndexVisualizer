@@ -1,5 +1,4 @@
 import { Page } from "@/types/Page";
-import { Bucket } from "@/types/Bucket";
 import { BucketItem } from "@/types/BucketItem";
 import { BucketList } from "@/types/BucketList";
 

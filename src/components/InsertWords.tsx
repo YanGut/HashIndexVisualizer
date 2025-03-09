@@ -17,11 +17,15 @@ export default function InsertWords({ setWords }: PageSizeInputProps) {
   };
 
   return (
-    <div className="flex flex-col gap-2">
-      <label htmlFor="search-word" className="text-lg font-medium text-gray-700">
-        Insira as palavras:
-      </label>
-      <input type="file" accept=".txt" onChange={handleFileUpload} />
+    <div className="flex flex-col gap-4 bg-gray-800 rounded-lg w-full max-w-md">
+      
+    <label className="text-lg font-semibold text-gray-100">Upload file</label>
+    <input
+     accept=".txt"
+     onChange={handleFileUpload}
+      className="file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-600 file:text-white file:cursor-pointer hover:file:bg-blue-700 transition-all rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file"/>
+
     </div>
+
   );
 }

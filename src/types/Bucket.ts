@@ -28,7 +28,12 @@ export class Bucket {
     if (item) {
       return item;
     } else {
-      return this.bucketOverflow?.search(word) ? this.bucketOverflow.search(word) : null;
+
+      if (this.bucketOverflow) {
+        return this.bucketOverflow.search(word);
+      }
+
+      return null;
     }
   }
 

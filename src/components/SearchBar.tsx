@@ -29,11 +29,11 @@ export default function SearchBar({
       <div className="flex">
         <div className="relative flex-1">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <SearchIcon className="w-5 h-5 text-gray-500" />
+            <SearchIcon className="w-5 h-5 text-white" />
           </div>
           <input
             type="text"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+            className="bg-gray-600 border border-gray-300 text-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 placeholder-gray-400" 
             placeholder="Digite uma palavra para buscar..."
             value={searchWord}
             onChange={handleChange}
@@ -42,7 +42,7 @@ export default function SearchBar({
           />
         </div>
       </div>
-      <p className="mt-1 text-xs text-gray-500">
+      <p className="mt-1 text-xs text-gray-300">
         Digite uma palavra para buscar no índice e pressione Enter ou clique nos botões abaixo
       </p>
     </div>

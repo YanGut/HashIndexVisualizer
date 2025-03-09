@@ -1,10 +1,10 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import SearchIcon from "@/assets/icons/SearchIcon";
 
 interface SearchBarProps {
   searchWord: string;
   setSearchWord: (word: string) => void;
-  onSearch?: () => void;
+  onSearch?: (word: string) => void;
   isDisabled?: boolean;
 }
 
@@ -14,13 +14,26 @@ export default function SearchBar({
   onSearch,
   isDisabled = false
 }: SearchBarProps) {
+  const [inputValue, setInputValue] = useState(searchWord);
+
+  // Debounce para atualizar o estado apenas quando o usuário parar de digitar
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setSearchWord(inputValue);
+    }, 500);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [inputValue]);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchWord(e.target.value);
+    setInputValue(e.target.value);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && onSearch && !isDisabled && searchWord.trim()) {
-      onSearch();
+    if (e.key === 'Enter' && !e.repeat && onSearch && !isDisabled && inputValue.trim()) {
+      onSearch(inputValue);
     }
   };
 
@@ -35,7 +48,7 @@ export default function SearchBar({
             type="text"
             className="bg-gray-600 border border-gray-300 text-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 placeholder-gray-400" 
             placeholder="Digite uma palavra para buscar..."
-            value={searchWord}
+            value={inputValue}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
             disabled={isDisabled}

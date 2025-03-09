@@ -1,8 +1,9 @@
 export interface PageSizeInputProps {
   setWords: (words: string[]) => void;
+  limparStates: () => void;
 }
 
-export default function InsertWords({ setWords }: PageSizeInputProps) {
+export default function InsertWords({ setWords, limparStates }: PageSizeInputProps) {
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -13,6 +14,9 @@ export default function InsertWords({ setWords }: PageSizeInputProps) {
       const wordsArray = text.split("\n").map(word => word.trim()).filter(word => word.length > 0);
       setWords(wordsArray);
     };
+
+    limparStates();
+
     reader.readAsText(file);
   };
 

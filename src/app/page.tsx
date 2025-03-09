@@ -103,6 +103,26 @@ export default function Home() {
     setScanCost(scanRes.pagesScanned);
   };
 
+  const limparStates = () => {
+  
+    setWords([]);
+    setSearchWord("");
+    setDisk([]);
+    setBucketList(new BucketList(bucketListSize, bucketSize));
+    setSearchResult(null);
+    setScanResult(null);
+    setCollisionRate(0);
+    setOverflowsRate(0);
+    setSearchCost(0);
+    setScanCost(0);
+    setSearchTime(0);
+    setScanTime(0);
+    setTimeDifference(0);
+    setIsDataLoaded(false);
+    setSelectedPageIndex(null);
+  
+  }
+
   return (
     <main className="min-h-screen p-6 bg-gray-900 text-gray-200">
       <h1 className="text-3xl font-bold text-center mb-8">Índice Hash Estático</h1>
@@ -113,7 +133,7 @@ export default function Home() {
           <h2 className="text-xl font-semibold mb-4">Configuração</h2>
           <div className="space-y-6">
             <PageSizeInput setPageSize={setPageSize} />
-            <InsertWords setWords={setWords} />
+            <InsertWords setWords={setWords} limparStates={limparStates}/>
             <div className="grid grid-cols-2 gap-4 mt-4">
               <div className="bg-gray-700 p-3 rounded-lg">
                 <p className="text-sm text-gray-300">Total de Palavras</p>

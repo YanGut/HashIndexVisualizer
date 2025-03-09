@@ -7,14 +7,20 @@ import { hashFunction } from "./hash";
 
 export function tableScanner(searchWord: string, disk: Page[]): TableScanResult | null {
 
+  let contador = 0;
+
   for (let i = 0; i < disk.length; i++) {
     const { words, id } = disk[i];
 
-    if (words.includes(searchWord)) {
+    contador++;
+
+    const word = words.find((word) => word === searchWord);
+
+    if (word) {
       return {
-        word: searchWord,
+        word: word,
         pageNumber: id,
-        pagesScanned: i + 1,
+        pagesScanned: contador,
         found: true
       };
     }
@@ -23,7 +29,7 @@ export function tableScanner(searchWord: string, disk: Page[]): TableScanResult 
   return {
     word: searchWord,
     pageNumber: 1,
-    pagesScanned: 1,
+    pagesScanned: contador,
     found: false
   };
 }

@@ -65,14 +65,15 @@ export default function HashTableView({ bucketList, selectedWord }: HashTableVie
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
         {bucketList.buckets.map((bucket, index) => (
           <div
-            key={index}
-            className={`p-3 rounded-lg cursor-pointer border-2 transition-colors ${
-              highlightedBucket === index
-                ? 'border-red-500 '
-                : 'border-gray-200 hover:border-blue-300'
-            }`}
-            onClick={() => setExpandedBucket(expandedBucket === index ? null : index)}
-          >
+          key={index}
+          className={`p-3 rounded-lg cursor-pointer border-2 transition-colors self-start ${
+            highlightedBucket === index
+              ? 'border-red-500'
+              : 'border-gray-200 hover:border-blue-300'
+          }`}
+          onClick={() => setExpandedBucket(expandedBucket === index ? null : index)}
+        >
+        
             <div className="flex justify-between items-center">
               <h3 className="font-medium">Bucket {index}</h3>
               <span className="text-sm bg-gray-600 px-2 py-1 rounded">

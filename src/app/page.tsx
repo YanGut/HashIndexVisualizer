@@ -132,8 +132,8 @@ export default function Home() {
         <div className="lg:col-span-1 bg-gray-800 rounded-lg shadow-md p-6">
           <h2 className="text-xl font-semibold mb-4">Configuração</h2>
           <div className="space-y-6">
-            <PageSizeInput setPageSize={setPageSize} />
-            <InsertWords setWords={setWords} limparStates={limparStates}/>
+            <PageSizeInput setPageSize={setPageSize} setBucketSize={setBucketSize} bucketSize={bucketSize} />
+            <InsertWords setWords={setWords} limparStates={limparStates} bucketSize={bucketSize} pageSize={pageSize}/>
             <div className="grid grid-cols-2 gap-4 mt-4">
               <div className="bg-gray-700 p-3 rounded-lg">
                 <p className="text-sm text-gray-300">Total de Palavras</p>
